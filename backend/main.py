@@ -14,6 +14,7 @@ embeddings = np.load("data/embeddings.npy")
 class RecommendationRequest(BaseModel):
     movie_id: int
 
+# get the movie ids for the query sent in
 @app.get("/movies/search")
 def search_movies(q: str):
     matches = movies[
@@ -22,6 +23,7 @@ def search_movies(q: str):
 
     return {"results": matches.to_dict(orient="records")}
 
+# post or create a list of the recommendations and return a list
 @app.post("/recommend")
 def recommend(request: RecommendationRequest):
     results = recommend_movies(request.movie_id, movies, embeddings)
