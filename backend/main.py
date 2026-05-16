@@ -1,5 +1,6 @@
 # fastAPI app
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import pandas as pd
 import numpy as np
@@ -7,6 +8,15 @@ import numpy as np
 from backend.recommender import recommend_movies
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    # add in website URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 movies = pd.read_csv("data/movies.csv")
 embeddings = np.load("data/embeddings.npy")
