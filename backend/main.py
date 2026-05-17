@@ -29,7 +29,7 @@ class RecommendationRequest(BaseModel):
 def search_movies(q: str):
     matches = movies[
         movies["title"].str.contains(q, case=False, na=False)
-    ][["id", "title"]].head(10)
+    ][["id", "title"]].head(7)
 
     return {"results": matches.to_dict(orient="records")}
 
