@@ -1,10 +1,10 @@
 import "./App.css";
-import Hero from "./components/Hero"
+import MovieSearch from "./components/MovieSearch"
 
 export default function App() {
   return (
     <main className="app">
-      <Hero/>
+      <MovieSearch/>
     </main>
   );
 }
