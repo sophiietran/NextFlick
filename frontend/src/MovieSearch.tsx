@@ -1,3 +1,5 @@
+// return the movie that user chose
+
 import { useState } from "react";
 import type { ChangeEvent } from "react";
 
@@ -6,7 +8,12 @@ type MovieSuggestion = {
   title: string;
 };
 
-export default function MovieSearch() {
+type MovieSearchProps = {
+  onSelectMovie: (movie:MovieSuggestion) => void;
+}
+
+export default function MovieSearch({ onSelectMovie }: MovieSearchProps) {
+
   const [query, setQuery] = useState<string>("");
   const [suggestions, setSuggestions] = useState<MovieSuggestion[]>([]);
 
@@ -28,6 +35,12 @@ export default function MovieSearch() {
     } catch (error) {
       console.error("Search error:", error);
     }
+  }
+
+  function handleSelect(movie: MovieSuggestion){
+    setQuery(movie.title);
+    setSuggestions([]);
+    onSelectMovie(movie);
   }
 
   return (
@@ -55,7 +68,7 @@ export default function MovieSearch() {
       {suggestions.length > 0 && (
         <ul className="ms-suggestions">
           {suggestions.map((movie) => (
-            <li key={movie.id} className="ms-suggestion-item">
+            <li key={movie.id} className="ms-suggestion-item" onClick={() => handleSelect(movie)}>
               {movie.title}
             </li>
           ))}
