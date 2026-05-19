@@ -47,20 +47,23 @@ export default function Recommendations({ movieID }: RecProps) {
   }, [movieID]);
 
   if (!movieID) {
-    return <p>Select a movie to get recommendations.</p>;
+    return <p className = "rec-instructions">
+      Select a movie to get recommendations
+      </p>;
   }
 
   if (loading) {
-    return <p>Loading recommendations...</p>;
+    return <p className="rec-loading">
+      Loading recommendations...</p>;
   }
 
   return (
-    <section >
-      <h2>Recommendations</h2>
-      <ul>
+    <section className="rec-section" >
+      <h2 className="rec-title">Recommendations</h2>
+      <ul className="rec-list">
         {recommendations.map((movie) => (
-          <li key={movie.id}>
-            <strong>{movie.title}</strong>
+          <li className="rec-item" key={movie.id}>
+            {movie.title}
           </li>
         ))}
       </ul>
