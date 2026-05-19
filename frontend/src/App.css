@@ -122,6 +122,10 @@
     border-bottom: none;
 }
 
+.ms-suggestion-item.is-active {
+    background-color: #2d2d2d;
+  }
+
 
 @media (max-width: 640px) {
 .app {
