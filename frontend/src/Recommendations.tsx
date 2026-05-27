@@ -1,4 +1,5 @@
 import React from "react";
+import MoviePoster from "./components/MoviePoster";
 
 type RecProps = {
   movieID: number | null;
@@ -10,6 +11,8 @@ type Recommendation = {
   genre: string;
   overview: string;
   similarity: number;
+  release_date: string;
+  poster_url: string;
 };
 
 export default function Recommendations({ movieID }: RecProps) {
@@ -47,9 +50,7 @@ export default function Recommendations({ movieID }: RecProps) {
   }, [movieID]);
 
   if (!movieID) {
-    return <p className = "rec-instructions">
-      Select a movie to get recommendations
-      </p>;
+    return
   }
 
   if (loading) {
@@ -58,15 +59,24 @@ export default function Recommendations({ movieID }: RecProps) {
   }
 
   return (
-    <section className="rec-section" >
-      <h2 className="rec-title">Recommendations</h2>
-      <ul className="rec-list">
-        {recommendations.map((movie) => (
-          <li className="rec-item" key={movie.id}>
-            {movie.title}
-          </li>
-        ))}
-      </ul>
-    </section>
+
+      <section className="rec-section" >
+        <h2 className="rec-title">Recommendations</h2>
+        <ul className="rec-list">
+          {recommendations.map((movie) => (
+            <li className="rec-item" key={movie.id}>
+              <MoviePoster
+                title = {movie.title}
+                posterUrl={movie.poster_url}
+                genre={movie.genre}
+                overview={movie.overview}
+                releaseDate={movie.release_date}
+                similarity={movie.similarity}/>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+    
   );
 }

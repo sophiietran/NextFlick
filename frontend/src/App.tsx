@@ -15,8 +15,9 @@ export default function App() {
   return (
     <main className="app">
       <div className="app-content">
-        <MovieSearch onSelectMovie={setSelectedMovie}/>
-        <Recommendations movieID={selectedMovie?.id ?? null}/>
+        <MovieSearch onSelectMovie={setSelectedMovie} />
+        
+        <Recommendations movieID={selectedMovie?.id ?? null} />
       </div>
     </main>
   );
