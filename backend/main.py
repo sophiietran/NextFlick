@@ -18,7 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-movies = pd.read_csv("data/movies.csv")
+movies = pd.read_csv("data/movies_with_posters.csv")
 embeddings = np.load("data/embeddings.npy")
 
 class RecommendationRequest(BaseModel):

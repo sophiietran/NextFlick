@@ -18,7 +18,7 @@ def recommend_movies(movie_id, movies, embeddings, top_n=10):
     top_indices = np.argsort(similarities)[::-1]
     top_indices = [i for i in top_indices if i != idx][:top_n]
 
-    results = movies.iloc[top_indices][["id", "title", "genre", "overview"]].copy()
+    results = movies.iloc[top_indices][["id", "title", "genre", "overview", "release_date", "poster_url"]].copy()
     results["similarity"] = similarities[top_indices]
 
     return results.to_dict(orient="records") # convert dataframe into dictionary
