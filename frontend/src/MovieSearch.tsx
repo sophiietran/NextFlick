@@ -16,16 +16,16 @@ export default function MovieSearch({ onSelectMovie }: MovieSearchProps) {
   const [query, setQuery] = React.useState<string>("");
   const [suggestions, setSuggestions] = React.useState<MovieSuggestion[]>([]);
   const [chosenMovie, setChosenMovie] = React.useState<MovieSuggestion | null>(null);
-  const [highlightedIndex, setHighlightedIndex] = React.useState<number>(-1);
+  const [highlightedIndex, setHighlightedIndex] = React.useState<number>(0);
 
   async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
     setQuery(value);
     setChosenMovie(null);
-    setHighlightedIndex(-1);
-
+    
     if (!value.trim()) {
       setSuggestions([]);
+      // setHighlightedIndex(-1);
       return;
     }
 
@@ -44,6 +44,7 @@ export default function MovieSearch({ onSelectMovie }: MovieSearchProps) {
     setQuery(movie.title);
     setChosenMovie(movie);
     setSuggestions([]);
+    setHighlightedIndex(0);
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>){
@@ -76,12 +77,12 @@ export default function MovieSearch({ onSelectMovie }: MovieSearchProps) {
 
     if (e.key === "Enter" && highlightedIndex >= 0) {
       e.preventDefault();
-      handleSelect(suggestions[highlightedIndex]);
+      const selectedMovie = suggestions[highlightedIndex];
+      handleSelect(selectedMovie);
+      onSelectMovie(selectedMovie);
     }
   }
   
-  
-
   return (
     <section className="hero">
       <h1 className="hero-title">NextFlick</h1>
