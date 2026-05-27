@@ -157,6 +157,7 @@
   border-radius: 0.75rem;
   padding: 1rem;
   margin: 1.5rem auto;
+  min-height: 260px;
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease,
@@ -171,9 +172,9 @@
 }
 
 .poster-img {
-  width: 150px;
-  height: 200px;
-  object-fit: cover;
+  width: 160px;
+  height: auto;
+  object-fit: contain;
   border-radius: 0.5rem;
   background: #2a2a2a;
   flex-shrink: 0;
@@ -186,6 +187,7 @@
   text-align: left;
   color: white;
   min-width: 0;
+  flex: 1;
 }
 
 .poster-title {
@@ -216,6 +218,27 @@
   color: #d1d5db;
   line-height: 1.5;
   font-size: 0.95rem;
+}
+
+.poster-overview.clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.poster-overview.expanded {
+  display: block;
+}
+
+.poster-toggle {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: #a4a0a0;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
 }
 
 .poster-score {
