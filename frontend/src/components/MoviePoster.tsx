@@ -44,24 +44,25 @@ export default function MoviePoster({
         <div className="poster-meta">
           <span className="poster-genre">{genre}</span>
           <span className="poster-date">{releaseDate}</span>
-        </div>
-
-        <p 
-          ref={overviewRef}
-          className={`poster-overview ${expanded ? "expanded" : "clamped"}`}
-          >{
-            overview}
+          
+          <p 
+            ref={overviewRef}
+            className={`poster-overview ${expanded ? "expanded" : "clamped"}`}
+            >{
+              overview}
           </p>
 
-        {(canExpand || expanded) && (
-          <button
-            type="button"
-            className="poster-toggle"
-            onClick={() => setExpanded((prev) => !prev)}
-          >
-            {expanded ? "Show less" : "Show More"}
-          </button>
-        )}
+          {(canExpand || expanded) && (
+            <button
+              type="button"
+              className="poster-toggle"
+              onClick={() => setExpanded((prev) => !prev)}
+            >
+              {expanded ? "Show less" : "Show More"}
+            </button>
+          )}
+        </div>
+
 
         <p className="poster-score">
           Match Score: {(similarity * 100).toFixed(2)} %

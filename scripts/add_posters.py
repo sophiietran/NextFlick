@@ -25,10 +25,6 @@ def get_poster_url(title: str, release_date: str | None = None) -> str | None:
         "query": title,
     }
     
-    # takes the first 4 characters of the release date (year)
-    if release_date and isinstance(release_date, str) and len(release_date) >= 4:
-        params["year"] = release_date[:4]
-    
     try: 
         response = requests.get(SEARCH_URL, params=params, timeout = 10)
         response.raise_for_status()
@@ -39,11 +35,36 @@ def get_poster_url(title: str, release_date: str | None = None) -> str | None:
         if not results:
             return None
         
-        poster_path = results[0].get("poster_path")
-        if not poster_path:
-            return None
         
+        exact_match = None
+        year_match = None
+        
+        for movie in results:
+            tmdb_date = movie.get("release_date")
+            poster_path = movie.get("poster_path")
+        
+            if not poster_path:
+                continue
+            if release_date and tmdb_date == release_date:
+                exact_match = movie
+                break
+            if ( release_date and tmdb_date and tmdb_date[:4] == release_date[:4] 
+                and year_match is None):
+                year_match = movie
+        
+        fallback_with_poster = next(
+            (movie for movie in results if movie.get("poster_path")),
+            None
+        )
+
+        selected_movie = exact_match or year_match or fallback_with_poster
+
+        if not selected_movie:
+            return None
+
+        poster_path = selected_movie.get("poster_path")
         return f"{IMAGE_BASE_URL}{poster_path}"
+    
     except requests.RequestException as error:
         print(f"Error fetching poster for {title}: {error}")
         return None
