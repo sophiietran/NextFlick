@@ -183,7 +183,6 @@
 .poster-content {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
   text-align: left;
   color: white;
   min-width: 0;
@@ -191,38 +190,50 @@
 }
 
 .poster-title {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: #ffffff;
-  margin-bottom: 0px;
 }
 
 .poster-meta {
   display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 5px;
-  gap: 0.8rem;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0.6rem 0;
+  gap: 0.6rem;
+}
+
+.poster-date {
   font-size: 0.9rem;
   color: #c7c7c7;
 }
 
-.poster-genre,
-.poster-date {
+.poster-genre{
+  font-size: 0.9rem;
+  color: #c7c7c7;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.poster-genre-item{
   background: rgba(255, 255, 255, 0.06);
-  padding: 0.25rem 0.55rem;
+  padding: 0.15rem 0.6rem;
   border-radius: 0.4rem;
 }
+
 
 .poster-overview {
   margin: 0;
   color: #d1d5db;
   line-height: 1.5;
   font-size: 0.95rem;
+  margin: 0.6rem 0;
 }
 
 .poster-overview.clamped {
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -238,7 +249,8 @@
   color: #a4a0a0;
   cursor: pointer;
   padding: 0;
-  font: inherit;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
 }
 
 .poster-score {
@@ -298,6 +310,11 @@
   }
 
   .poster-meta {
+    align-items: center;
+  }
+  
+  .poster-genre{
     justify-content: center;
   }
+
 }

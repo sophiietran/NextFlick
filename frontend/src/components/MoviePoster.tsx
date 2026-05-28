@@ -9,6 +9,16 @@ type MoviePosterProps = {
   similarity: number;
 };
 
+function formatReleaseDate(dateString: string) {
+  const date = new Date(dateString);
+
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
 export default function MoviePoster({
     title, 
     posterUrl, 
@@ -20,6 +30,11 @@ export default function MoviePoster({
   const [expanded, setExpanded] = React.useState(false)
   const [canExpand, setCanExpand] = React.useState(false);
   const overviewRef = React.useRef<HTMLParagraphElement | null>(null);
+  const genres = genre
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .sort((a, b) => a.localeCompare(b));
 
   React.useEffect(() => {
     const element = overviewRef.current;
@@ -42,9 +57,19 @@ export default function MoviePoster({
         <h3 className="poster-title">{title}</h3>
 
         <div className="poster-meta">
-          <span className="poster-genre">{genre}</span>
-          <span className="poster-date">{releaseDate}</span>
-          
+          <span className="poster-date">{formatReleaseDate(releaseDate)}</span>
+
+          <div className="poster-genre">
+            {genres.map((item) => (
+                <span key={item} className="poster-genre-item">
+                  {item}
+                </span>
+              ))}
+          </div>
+
+
+        </div>
+
           <p 
             ref={overviewRef}
             className={`poster-overview ${expanded ? "expanded" : "clamped"}`}
@@ -61,8 +86,6 @@ export default function MoviePoster({
               {expanded ? "Show less" : "Show More"}
             </button>
           )}
-        </div>
-
 
         <p className="poster-score">
           Match Score: {(similarity * 100).toFixed(2)} %
