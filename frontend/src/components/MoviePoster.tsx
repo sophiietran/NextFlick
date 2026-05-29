@@ -12,11 +12,15 @@ type MoviePosterProps = {
 function formatReleaseDate(dateString: string) {
   const date = new Date(dateString);
 
-  return date.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
+  if (Number.isNaN(date.getTime())) {
+    return "Release date unknown";
+  }
+
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const year = date.getFullYear();
+
+  return `${month}-${day}-${year}`;
 }
 
 export default function MoviePoster({
@@ -36,12 +40,16 @@ export default function MoviePoster({
     .filter(Boolean)
     .sort((a, b) => a.localeCompare(b));
 
+  
+  // overview expansion
   React.useEffect(() => {
     const element = overviewRef.current;
 
-    if(!element || expanded) return;
-
-    setCanExpand(element.scrollHeight > element.clientHeight);
+    if(!element) return
+    
+    
+    setCanExpand(element.scrollHeight > element.clientHeight + 1);
+    
   }, [overview, expanded]);
         
   

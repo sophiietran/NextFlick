@@ -45,6 +45,7 @@ export default function MovieSearch({ onSelectMovie }: MovieSearchProps) {
     setChosenMovie(movie);
     setSuggestions([]);
     setHighlightedIndex(0);
+    onSelectMovie(movie);
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>){
@@ -79,7 +80,6 @@ export default function MovieSearch({ onSelectMovie }: MovieSearchProps) {
       e.preventDefault();
       const selectedMovie = suggestions[highlightedIndex];
       handleSelect(selectedMovie);
-      onSelectMovie(selectedMovie);
     }
   }
   
@@ -102,9 +102,6 @@ export default function MovieSearch({ onSelectMovie }: MovieSearchProps) {
           onKeyDown={handleKeyDown}
         />
 
-        <button className="hero-button" type="submit">
-          Recommend!
-        </button>
       </form>
 
       {suggestions.length > 0 && (

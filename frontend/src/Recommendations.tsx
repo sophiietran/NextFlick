@@ -62,6 +62,7 @@ export default function Recommendations({ movieID }: RecProps) {
 
       <section className="rec-section" >
         <h2 className="rec-title">Recommendations</h2>
+        
         <ul className="rec-list">
           {recommendations.map((movie) => (
             <li className="rec-item" key={movie.id}>

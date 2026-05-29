@@ -20,7 +20,8 @@
 
 .app-content {
   width: 100%;
-  max-width: 720px;
+  max-width: 1300px;
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
@@ -52,7 +53,7 @@
   justify-content: center;
   gap: 0.75rem;
   flex-wrap: wrap;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 }
 
 .hero-input {
@@ -81,34 +82,12 @@
   background-color: rgba(40, 40, 40, 0.98);
 }
 
-.hero-button {
-  padding: 0.75rem 1.2rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #ffffff;
-  background-color: #e50914;
-  border: none;
-  border-radius: 0.4rem;
-  cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    transform 0.2s ease;
-}
-
-.hero-button:hover {
-  background-color: #c30711;
-  transform: translateY(-1px);
-}
-
-.hero-button:active {
-  transform: translateY(0);
-}
-
 /* SUGGESTIONS SEARCH */
 
 .ms-suggestions {
   list-style: none;
-  margin: 2rem auto;
+  margin-top: 0;
+  margin-bottom: 2rem;
   padding: 0;
   background: #1f1f1f;
   border-radius: 0.4rem;
@@ -143,25 +122,45 @@
   font-style: italic;
 }
 
+.rec-title{
+  margin: 2rem 0;
+}
+
+.rec-list{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  gap: 1.5rem;
+}
+
+
 .rec-item {
-  list-style-type: none;
+  list-style: none;
 }
 
 /* POSTER */
 .movie-poster {
   display: flex;
-  gap: 2rem;
+  gap: 1.3rem;
   align-items: flex-start;
+  height: 300px;
+  width: 100%;
+  box-sizing: border-box;
   background-color: rgba(30, 30, 30, 0.95);
   border: 1px solid #333333;
   border-radius: 0.75rem;
   padding: 1rem;
-  margin: 1.5rem auto;
-  min-height: 260px;
+  overflow: hidden; 
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease,
     border-color 0.2s ease;
+}
+
+.movie-poster.expanded {
+  height: auto;
 }
 
 .movie-poster:hover {
@@ -173,7 +172,7 @@
 
 .poster-img {
   width: 160px;
-  height: auto;
+  height: 240px;
   object-fit: contain;
   border-radius: 0.5rem;
   background: #2a2a2a;
@@ -199,7 +198,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 0.6rem 0;
+  margin: 0.4rem 0;
   gap: 0.6rem;
 }
 
@@ -224,7 +223,6 @@
 
 
 .poster-overview {
-  margin: 0;
   color: #d1d5db;
   line-height: 1.5;
   font-size: 0.95rem;
@@ -233,9 +231,10 @@
 
 .poster-overview.clamped {
   display: -webkit-box;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  max-height: 6em;
 }
 
 .poster-overview.expanded {
@@ -260,9 +259,21 @@
   color: #e50914ce;
 }
 
-@media (max-width: 640px) {
+
+@media (max-width: 1100px) {
+  .rec-list {
+    grid-template-columns: 1fr;
+    max-width: 920px;
+  }
+}
+
+@media (max-width: 770px) {
   .app {
-    padding-top: 6rem;
+    padding: 6rem 1.5rem 2rem;
+  }
+
+  .app-content{
+    max-width: 100%;
   }
 
   .hero-subtitle {
@@ -279,20 +290,19 @@
     flex: none;
   }
 
-  .hero-button {
+  .rec-list {
     width: 100%;
-    margin-top: 0.5rem;
-  }
-
-  .hero-suggestions {
-    width: 100%;
-    max-width: 500px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
   }
 
   .movie-poster {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    height: auto;
+    width: 100%;
   }
 
   .poster-content {
@@ -305,16 +315,15 @@
     height: 240px;
     margin-top: 0.3rem;
   }
-  .poster-title {
-    margin-bottom: 1rem;
-  }
 
   .poster-meta {
-    align-items: center;
-  }
-  
-  .poster-genre{
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
+  .poster-toggle {
+    align-self: center;
+  }
 }
