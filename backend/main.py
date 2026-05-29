@@ -33,6 +33,16 @@ def search_movies(q: str):
 
     return {"results": matches.to_dict(orient="records")}
 
+@app.get("/movies/{movie_id}")
+def get_movie(movie_id: int):
+    match = movies[movies["id"] == movie_id]
+
+    if match.empty:
+        raise HTTPException(status_code=404, detail="Movie not found")
+
+    movie = match.iloc[0][["id", "title", "genre", "overview", "release_date", "poster_url"]].to_dict()
+    return movie
+
 # post or create a list of the recommendations and return a list
 @app.post("/recommend")
 def recommend(request: RecommendationRequest):
