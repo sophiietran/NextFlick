@@ -59,8 +59,7 @@ export default function SelectedMovieInfo( {movie}:SelectedMovieProps) {
           <p className="selected-overview">{movie.overview}</p>
         </div>
       </div>
-
-      <h3 className="selected-label">RECOMMENDATIONS:</h3>
+      
     </section>
   );
 }

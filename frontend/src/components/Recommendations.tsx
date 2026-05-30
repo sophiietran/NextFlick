@@ -3,6 +3,8 @@ import MoviePoster from "./MoviePoster";
 
 type RecProps = {
   movieID: number | null;
+  showMatchScore: boolean;
+  onToggleMatchScore: () => void;
 };
 
 type Recommendation = {
@@ -15,7 +17,7 @@ type Recommendation = {
   poster_url: string;
 };
 
-export default function Recommendations({ movieID }: RecProps) {
+export default function Recommendations({ movieID, showMatchScore, onToggleMatchScore }: RecProps) {
   const [recommendations, setRecommendations] = React.useState<
     Recommendation[]
   >([]);
@@ -50,7 +52,7 @@ export default function Recommendations({ movieID }: RecProps) {
   }, [movieID]);
 
   if (!movieID) {
-    return
+    return null;
   }
 
   if (loading) {
@@ -59,25 +61,35 @@ export default function Recommendations({ movieID }: RecProps) {
   }
 
   return (
+    <section className="rec-section">
 
-      <section className="rec-section" >
-        {/* <h2 className="rec-title">Recommendations</h2> */}
+      <div className="rec-header">
+        <h3 className="rec-title">RECOMMENDATIONS:</h3>
 
-        <ul className="rec-list">
-          {recommendations.map((movie) => (
-            <li className="rec-item" key={movie.id}>
-              <MoviePoster
-                title = {movie.title}
-                posterUrl={movie.poster_url}
-                genre={movie.genre}
-                overview={movie.overview}
-                releaseDate={movie.release_date}
-                similarity={movie.similarity}/>
-            </li>
-          ))}
-        </ul>
-      </section>
+        <button
+          type="button"
+          className="score-toggle"
+          onClick={onToggleMatchScore}
+        >
+          {showMatchScore ? "Hide Scores" : "View Scores"}
+        </button>
+      </div>
 
-    
+      <ul className="rec-list">
+        {recommendations.map((movie) => (
+          <li className="rec-item" key={movie.id}>
+            <MoviePoster
+              title={movie.title}
+              posterUrl={movie.poster_url}
+              genre={movie.genre}
+              overview={movie.overview}
+              releaseDate={movie.release_date}
+              similarity={movie.similarity}
+              showMatchScore={showMatchScore}
+            />
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }

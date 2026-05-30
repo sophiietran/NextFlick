@@ -7,6 +7,7 @@ type MoviePosterProps = {
   overview: string;
   releaseDate: string;
   similarity: number;
+  showMatchScore: boolean;
 };
 
 function formatReleaseDate(dateString: string) {
@@ -29,11 +30,13 @@ export default function MoviePoster({
     genre, 
     overview, 
     releaseDate, 
-    similarity}: MoviePosterProps) {
+    similarity,
+    showMatchScore,}: MoviePosterProps) {
     
   const [expanded, setExpanded] = React.useState(false)
   const [canExpand, setCanExpand] = React.useState(false);
   const overviewRef = React.useRef<HTMLParagraphElement | null>(null);
+  
   const genres = genre
     .split(",")
     .map((item) => item.trim())
@@ -46,7 +49,6 @@ export default function MoviePoster({
     const element = overviewRef.current;
 
     if(!element) return
-    
     
     setCanExpand(element.scrollHeight > element.clientHeight + 1);
     
@@ -69,35 +71,35 @@ export default function MoviePoster({
 
           <div className="poster-genre">
             {genres.map((item) => (
-                <span key={item} className="poster-genre-item">
-                  {item}
-                </span>
-              ))}
+              <span key={item} className="poster-genre-item">
+                {item}
+              </span>
+            ))}
           </div>
-
-
         </div>
 
-          <p 
-            ref={overviewRef}
-            className={`poster-overview ${expanded ? "expanded" : "clamped"}`}
-            >{
-              overview}
-          </p>
-
-          {(canExpand || expanded) && (
-            <button
-              type="button"
-              className="poster-toggle"
-              onClick={() => setExpanded((prev) => !prev)}
-            >
-              {expanded ? "Show less" : "Show More"}
-            </button>
-          )}
-
-        <p className="poster-score">
-          Match Score: {(similarity * 100).toFixed(2)} %
+        <p
+          ref={overviewRef}
+          className={`poster-overview ${expanded ? "expanded" : "clamped"}`}
+        >
+          {overview}
         </p>
+
+        {(canExpand || expanded) && (
+          <button
+            type="button"
+            className="poster-toggle"
+            onClick={() => setExpanded((prev) => !prev)}
+          >
+            {expanded ? "Show less" : "Show More"}
+          </button>
+        )}
+
+        {showMatchScore && (
+          <p className="poster-score">
+            Match Score: {(similarity * 100).toFixed(2)} %
+          </p>
+        )}
       </div>
     </section>
   );
