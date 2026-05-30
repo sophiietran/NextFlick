@@ -115,6 +115,94 @@
   background-color: #2d2d2d;
 }
 
+/* SELCTED MOVIE INFO */
+.selected-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.selected-label {
+  margin-top: 2.5rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #e50914c1;
+  text-align: center;
+}
+
+.selected-card {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+.selected-img {
+  width: 150px;
+  height: 225px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  background: #2a2a2a;
+  flex-shrink: 0;
+}
+
+.selected-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  color: white;
+  max-width: 550px;
+}
+
+.selected-title {
+  margin: 0 0 0.4rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.selected-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.selected-date {
+  font-size: 0.95rem;
+  color: #c7c7c7;
+  margin-bottom: 0.6rem;
+}
+
+.selected-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.selected-genre-item {
+  background: rgba(255, 255, 255, 0.06);
+  color: #c7c7c7;
+  padding: 0.18rem 0.65rem;
+  border-radius: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.selected-overview {
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #d1d5db;
+}
+
 /* RECOMMENDATIONS */
 .rec-loading {
   margin: 2rem auto 2rem;
@@ -148,7 +236,7 @@
   height: 300px;
   width: 100%;
   box-sizing: border-box;
-  background-color: rgba(30, 30, 30, 0.95);
+  background-color: rgba(36, 35, 35, 0.636);
   border: 1px solid #333333;
   border-radius: 0.75rem;
   padding: 1rem;

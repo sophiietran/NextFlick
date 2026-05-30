@@ -1,4 +1,4 @@
-import "./App.css";
+import "./css/App.css";
 import React from "react";
 import MovieSearch from "./components/MovieSearch"
 import Recommendations from "./components/Recommendations";
