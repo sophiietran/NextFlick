@@ -1,4 +1,5 @@
 import type { MovieDetails } from "../types/movieTypes";
+import React from "react";
 
 type SelectedMovieProps = {
   movie: MovieDetails | null;
@@ -19,6 +20,23 @@ function formatReleaseDate(dateString: string) {
 }
 
 export default function SelectedMovieInfo( {movie}:SelectedMovieProps) {
+
+  const [expanded, setExpanded] = React.useState(false);
+  const [canExpand, setCanExpand] = React.useState(false);
+  const overviewRef = React.useRef<HTMLParagraphElement | null>(null);
+
+  React.useEffect(() => {
+    setExpanded(false);
+  }, [movie]);
+
+  React.useEffect(() => {
+    const element = overviewRef.current;
+
+    if (!element) return;
+
+    setCanExpand(element.scrollHeight > element.clientHeight + 1);
+  }, [movie, expanded]);
+  
   if(!movie){
     return null;
   }
@@ -42,7 +60,6 @@ export default function SelectedMovieInfo( {movie}:SelectedMovieProps) {
           <h2 className="selected-title">{movie.title}</h2>
 
           <div className="selected-meta">
-
             <span className="selected-date">
               {formatReleaseDate(movie.release_date)}
             </span>
@@ -56,10 +73,25 @@ export default function SelectedMovieInfo( {movie}:SelectedMovieProps) {
             </div>
           </div>
 
-          <p className="selected-overview">{movie.overview}</p>
+          <p
+            ref={overviewRef}
+            className={`selected-overview ${expanded ? "expanded" : "clamped"}`}
+          >
+            {movie.overview}
+          </p>
+
+          {(canExpand || expanded) && (
+            <button
+              type="button"
+              className="selected-toggle"
+              onClick={() => setExpanded((prev) => !prev)}
+            >
+              {expanded ? "See less" : "See more"}
+            </button>
+          )}
+          
         </div>
       </div>
-      
     </section>
   );
 }

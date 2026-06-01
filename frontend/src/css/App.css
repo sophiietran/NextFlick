@@ -33,7 +33,7 @@
 }
 
 .hero-title {
-  font-size: clamp(3rem, 10vw, 5rem);
+  font-size: clamp(3.5rem, 10vw, 5rem);
   font-weight: 500;
   letter-spacing: -0.02em;
   color: #e50914;
@@ -193,6 +193,29 @@
   font-size: 0.95rem;
   line-height: 1.55;
   color: #d1d5db;
+}
+
+.selected-overview.clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-height: 7.8em;
+}
+
+.selected-overview.expanded {
+  display: block;
+}
+
+.selected-toggle {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: #a4a0a0;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
 }
 
 /* RECOMMENDATIONS */
@@ -404,6 +427,39 @@
   .hero-input {
     width: 100%;
     flex: none;
+  }
+
+  .selected-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .selected-img {
+    width: 160px;
+    height: 240px;
+  }
+  
+  .selected-info {
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+  }
+  
+  .selected-meta {
+    justify-content: center;
+  }
+  
+  .selected-genres {
+    justify-content: center;
+  }
+  
+  .selected-overview {
+    text-align: center;
+  }
+
+  .selected-toggle {
+    align-self: center;
   }
 
   .rec-header {
