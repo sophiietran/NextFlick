@@ -40,7 +40,7 @@ export default function MovieSearch({ onSelectMovie }: MovieSearchProps) {
     setHighlightedIndex(0);
 
     try {
-      const response = await fetch(`http://localhost:8000/movies/${movie.id}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/movies/${movie.id}`);
       const data = await response.json();
       onSelectMovie(data);
     } catch (error) {

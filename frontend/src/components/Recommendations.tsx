@@ -33,11 +33,14 @@ export default function Recommendations({ movieID, showMatchScore, onToggleMatch
       setLoading(true);
 
       try {
-        const response = await fetch("http://localhost:8000/recommend", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ movie_id: movieID }),
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/recommend`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ movie_id: movieID }),
+          },
+        );
 
         const data = await response.json();
         setRecommendations(data.recommendations || []);
