@@ -25,8 +25,8 @@ export default function MovieSearch({ onSelectMovie }: MovieSearchProps) {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/movies/search?q=${encodeURIComponent(value)}`
-      );
+        `${import.meta.env.VITE_API_URL}/movies/search?q=${encodeURIComponent(value)}`,
+      );      
       const data = await response.json();
       setSuggestions(data.results || []);
     } catch (error) {
@@ -40,7 +40,9 @@ export default function MovieSearch({ onSelectMovie }: MovieSearchProps) {
     setHighlightedIndex(0);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/movies/${movie.id}`);
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/movies/${movie.id}`,
+      );
       const data = await response.json();
       onSelectMovie(data);
     } catch (error) {
